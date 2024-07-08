@@ -1,0 +1,62 @@
+﻿@model Obligatorio.ViewModels.MaquinasIndexViewModel
+
+@{
+    ViewBag.Title = "Índice de Máquinas";
+}
+
+<h2>Índice de Máquinas</h2>
+
+<form method="get" asp-action="Index">
+    <select asp-for="LocalId" class="form-control">
+        <option value="">Todos los locales</option>
+        @foreach (var local in (SelectList)ViewBag.Locales)
+        {
+            <option value="@local.Value">@local.Text</option>
+        }
+    </select>
+    <input type="submit" value="Filtrar" class="btn btn-primary" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Tipo de Máquina
+            </th>
+            <th>
+                Local
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewBag.DateSortParm">
+                    Fecha de Compra
+                </a>
+            </th>
+            <th>
+                Precio de Compra
+            </th>
+            <th>
+                Vida Útil (Años)
+            </th>
+            <th>
+                Años de Vida Útil Restantes
+            </th>
+            <th>
+                Disponible
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Maquinas)
+        {
+            <tr>
+                <td>@item.TipoDeMaquina.Nombre</td>
+                <td>@item.Local.Nombre</td>
+                <td>@item.FechaCompra.ToShortDateString()</td>
+                <td>@item.PrecioCompra</td>
+                <td>@item.VidaUtil</td>
+                <td>@item.AniosVidaUtilRestantes</td>
+                <td>@item.Disponible</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Obligatorio.ViewModels.MaquinasFiltradasViewModel>
+
+@{
+    ViewBag.Title = "Filtrar Máquinas";
+}
+
+<h2>Filtrar Máquinas</h2>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tipo de Máquina</th>
+            <th>Cantidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Tipo</td>
+                <td>@item.Cantidad</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

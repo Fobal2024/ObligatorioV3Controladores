@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Obligatorio.Models.Socio>
+@{
+    ViewBag.Title = "Índice de Socios";
+}
+
+<h2>Índice de Socios</h2>
+
+<form method="get" asp-action="Index">
+    <div class="form-group">
+        <label for="tipo">Tipo de Usuario:</label>
+        <select id="tipo" name="tipo" class="form-control" asp-items="ViewBag.Tipos">
+            <option value="">Todos</option>
+            @foreach (var item in ViewBag.Tipos)
+            {
+                <option value="@item">@item</option>
+            }
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrar</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Local</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Nombre</td>
+                <td>@item.Email</td>
+                <td>@item.LocalAsociado?.Nombre</td>
+                <td>@item.Tipo</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalles</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
